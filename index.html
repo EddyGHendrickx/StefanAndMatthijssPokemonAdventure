@@ -2,51 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="style.css" rel="stylesheet">
     <title>Pokedex</title>
 </head>
 <body>
 
-<div id="pokedex">
+<div class="container">
+
     <p>Enter a pokemon by ID or name.</p>
-    <input type="text" id="nameInput" placeholder="Name">
-    <input type="text" id="idInput" placeholder="ID">
+    <input id="nameInput" placeholder="Name" type="text">
+    <input id="idInput" placeholder="ID" type="text">
     <button id="run">Find this pokémon</button>
 
-    <p>Name: <span id="pokemonNameHTML"></span></p>
-    <p>ID: <span id="pokemonIdHTML"></span></p>
+    <div class="d-flex" id="pokedex">
 
-    <div id="pokemonSprite">
-        <img alt="" id="sprite">
-    </div>
-    <div id="pokemonPreviousEvolution">
-        <h2 id="previousName"></h2>
-        <img alt="" id="spritePrevious">
-        <p>Name: <span id="previousNameHTML"></span></p>
-        <p>ID: <span id="previousIdHTML"></span></p>
-    </div>
-    <table class="table table-dark">
-        <thead>
-        <tr>
-            <th scope="col">Move 1</th>
-            <th scope="col">Move 2</th>
-            <th scope="col">Move 3</th>
-            <th scope="col">Move 3</th>
-        <tr>
-            <th scope="row" id="move1"></th>
-            <td id="move2"></td>
-            <td id="move3"></td>
-            <td id="move4"></td>
-    </table>
+        <div>
 
+            <div class="bg-success" id="pokemonSprite" style="height: 200px; width: 200px">
+                <img alt="" id="sprite">
+            </div>
+            <div class="d-flex justify-content-between">
+            <p>Name: </p><div id="previousNameHTML" class="border"></div>
+            <p>ID: </p><div id="previousIdHTML"></div>
+            </div>
+        </div>
+        <div class="flex-column">
+            <p id="move2" class="p-3 border">TEST</p>
+            <p id="move3" class="p-3 border">TEST</p>
+            <p id="move1" class="p-3 border">TEST</p>
+            <p id="move4" class="p-3 border">TEST</p>
+
+        </div>
+        <!--<p>Name: <span id="pokemonNameHTML"></span></p>
+        <p>ID: <span id="pokemonIdHTML"></span></p>
+        <div id="pokemonPreviousEvolution">
+            <h2 id="previousName"></h2>
+            <img alt="" id="spritePrevious">
+
+
+        </div> -->
+
+
+    </div>
 
 </div>
-
 
 <script src="script.js"></script>
 <script crossorigin="anonymous"
