@@ -12,10 +12,10 @@ let previousEvolutionSprite;
 document.getElementById("run").addEventListener("click", function () {
     console.log(nameInput.value);
     getPokemon();
-    getPreviousEvolution()
+    getEvolution()
 });
 
-    async function getPokemon() {
+    async function getPokemon(id) {
         // use backticks ``
         let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nameInput.value}`);
         let pokemonData = await response.json();
@@ -40,16 +40,26 @@ document.getElementById("run").addEventListener("click", function () {
 
     async function getEvolution() {
         let response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${nameInput.value}`);
-        let evolutionData = response.json();
-        console.log(evolutionData);
+        let evolutionData = await response.json();
+        console.log(evolutionData.evolves_from_species.name);
+        const previousPokemonName = evolutionData.evolves_from_species.name;
+        getPreviousEvolution(previousPokemonName, evolutionData);
+
     }
 
-    async function getPreviousEvolution() {
-        let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nameInput.value}`);
-        let pokemonEvolutionDataPrevious = response.json();
-        console.log(pokemonEvolutionDataPrevious);
-    }
 
+
+async function getPreviousEvolution(naampokemon, data) {
+    let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${naampokemon}`);
+    let pokemonEvolutionDataPrevious = await response.json();
+    console.log(pokemonEvolutionDataPrevious);
+    console.log(data);
+
+    spriteHtml.setAttribute("src", pokemonSprite);
+    // console.log(pokemonEvolutionDataPrevious);
+    // document.getElementById("pokemonNameHTML").innerHTML = pokemonData.species.name;
+    // document.getElementById("pokemonIdHTML").innerHTML = pokemonData.id;
+}
 
 
 
