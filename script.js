@@ -23,7 +23,8 @@ document.getElementById("run").addEventListener("click", function () {
         let pokemonId = pokemonData.id;
         let pokemondMoves = pokemonData.moves;
         let pokemonSprite = pokemonData.sprites.front_shiny;
-        document.getElementById("pokemonNameHTML").innerHTML = pokemonData.id;
+        document.getElementById("pokemonNameHTML").innerHTML = pokemonData.species.name;
+        document.getElementById("pokemonIdHTML").innerHTML = pokemonData.id;
         spriteHtml.setAttribute("src", pokemonSprite);
 
 
