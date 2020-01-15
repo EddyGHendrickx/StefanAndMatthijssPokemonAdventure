@@ -2,7 +2,8 @@ let nameInput = document.getElementById("nameInput");
 let idInput = document.getElementById("idInput");
 let spriteHtml = document.getElementById("sprite");
 let spritePreviousEvolutionHtml = document.getElementById("spritePrevious");
-let previousEvolutionSprite
+
+// let previousEvolutionApi =
 
 
 async function getPokemon() {
@@ -19,8 +20,8 @@ async function getEvolution() {
 }
 async function getPreviousEvolution() {
     let response = await fetch("https://pokeapi.co/api/v2/pokemon/25");
-    let pokemonEvolutionData = response.json();
-    console.log(pokemonEvolutionData);
+    let pokemonEvolutionDataPrevious = response.json();
+    console.log(pokemonEvolutionDataPrevious);
 }
 
 
