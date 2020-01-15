@@ -6,6 +6,10 @@ let moveTwo = document.getElementById("move2");
 let moveFour = document.getElementById("move3");
 let moveThree = document.getElementById("move4");
 
+let previousNameHtml = document.getElementById("previousNameHTML");
+
+let previousIdHtml = document.getElementById("previousIdHTML");
+
 let spritePreviousHtml = document.getElementById("spritePrevious");
 
 document.getElementById("run").addEventListener("click", function () {
@@ -40,9 +44,16 @@ async function getPokemon(id) {
 async function getEvolution() {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${nameInput.value}`);
     let evolutionData = await response.json();
-    console.log(evolutionData.evolves_from_species.name);
-    const previousPokemonName = evolutionData.evolves_from_species.name;
-    getPreviousEvolution(previousPokemonName, evolutionData);
+    if (!(evolutionData.evolves_from_species == null)){
+        console.log(evolutionData.evolves_from_species.name);
+        const previousPokemonName = evolutionData.evolves_from_species.name;
+        getPreviousEvolution(previousPokemonName, evolutionData);
+    } else {
+        previousNameHtml.innerHTML = "";
+        previousIdHtml.innerHTML = "";
+        spritePreviousHtml.setAttribute("src", "just de kloten")
+    }
+
 
 }
 
@@ -55,8 +66,7 @@ async function getPreviousEvolution(namepokemon, data) {
     console.log(data);
     let pokemonSprite = pokemonEvolutionDataPrevious.sprites.front_shiny;
     spritePreviousHtml.setAttribute("src", pokemonSprite);
-    let previousNameHtml = document.getElementById("previousNameHTML");
-    let previousIdHtml = document.getElementById("previousIdHTML");
+
     previousNameHtml.innerHTML = pokemonEvolutionDataPrevious.name;
     previousIdHtml.innerHTML = pokemonEvolutionDataPrevious.id;
     //spritePreviousEvolutionHtml.setAttribute("src", );
