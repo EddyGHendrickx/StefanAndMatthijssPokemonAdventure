@@ -1,3 +1,11 @@
 #pokedex {
     background: #dc3545;
 }
+
+#innerBox {
+    background: white;
+    height: 180px;
+    width: 180px;
+    position: center;
+    padding: 4em;
+}

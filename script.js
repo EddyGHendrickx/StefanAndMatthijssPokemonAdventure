@@ -6,6 +6,7 @@ let moveTwo = document.getElementById("move2");
 let moveFour = document.getElementById("move3");
 let moveThree = document.getElementById("move4");
 
+
 let spritePreviousEvolutionHtml = document.getElementById("spritePrevious");
 let previousEvolutionSprite;
 
@@ -55,7 +56,6 @@ async function getPreviousEvolution(naampokemon, data) {
     console.log(pokemonEvolutionDataPrevious);
     console.log(data);
 
-    spriteHtml.setAttribute("src", pokemonSprite);
     // console.log(pokemonEvolutionDataPrevious);
     // document.getElementById("pokemonNameHTML").innerHTML = pokemonData.species.name;
     // document.getElementById("pokemonIdHTML").innerHTML = pokemonData.id;
