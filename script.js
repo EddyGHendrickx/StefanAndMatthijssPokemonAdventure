@@ -1,38 +1,19 @@
 let nameInput = document.getElementById("nameInput");
-let idInput = document.getElementById("idInput");
+
 let spriteHtml = document.getElementById("sprite");
-let finalInput;
+
 let spritePreviousEvolutionHtml = document.getElementById("spritePrevious");
 let previousEvolutionSprite;
+
 document.getElementById("run").addEventListener("click", function () {
-/*
- function getCorrectInput() {
-        if (!(nameInput.value === "" && idInput.value === "")) {
-            finalInput = idInput;
-            return finalInput;
-        } else if (!(nameInput.value === "")) {
-            finalInput = nameInput;
-            return finalInput;
-        } else if (!(idInput.value === "")) {
-            finalInput = idInput;
-            return finalInput;
-        } else {
-            alert("Please do enter something")
-        }
-    }
-    let varIets = getCorrectInput();
-    console.log(varIets);
-    
- */
-// let previousEvolutionApi =
-    getPokemon().catch(error => {
-        console.log("error");
-        console.error(error);
-    });
+    console.log(nameInput.value);
+    getPokemon();
+    getPreviousEvolution()
+});
 
     async function getPokemon() {
         // use backticks ``
-        let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${finalInput}`);
+        let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nameInput.value}`);
         let pokemonData = await response.json();
         console.log(pokemonData);
         console.log(pokemonData.id);
@@ -60,7 +41,7 @@ document.getElementById("run").addEventListener("click", function () {
         let pokemonEvolutionDataPrevious = response.json();
         console.log(pokemonEvolutionDataPrevious);
     }
-}());
+
 
 
 
