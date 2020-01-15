@@ -18,8 +18,8 @@ async function getEvolution() {
 }
 async function getPreviousEvolution() {
     let response = await fetch("https://pokeapi.co/api/v2/pokemon/25");
-    let pokemonData = response.json();
-    console.log(pokemonData);
+    let pokemonEvolutionData = response.json();
+    console.log(pokemonEvolutionData);
 }
 
 
