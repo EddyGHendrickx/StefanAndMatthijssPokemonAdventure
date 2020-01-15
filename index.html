@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Pokedex</title>
 </head>
-<body>
+<body class="bg-danger">
 
 <div id="pokedex">
     <p>Enter a pokemon by ID or name.</p>
@@ -24,7 +24,10 @@
         <img alt="" id="sprite">
     </div>
     <div id="pokemonPreviousEvolution">
+        <h2 id="previousName"></h2>
         <img alt="" id="spritePrevious">
+        <p>Name: <span id="previousNameHTML"></span></p>
+        <p>ID: <span id="previousIdHTML"></span></p>
     </div>
     <table class="table table-dark">
         <thead>
