@@ -1,7 +1,8 @@
-let varInput;
-let varPreviousEvolution;
-
-
+let nameInput = document.getElementById("nameInput");
+let idInput = document.getElementById("idInput");
+let spriteHtml = document.getElementById("sprite");
+let spritePreviousEvolutionHtml = document.getElementById("spritePrevious");
+let previousEvolutionSprite
 
 
 async function getPokemon() {
