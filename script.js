@@ -7,7 +7,6 @@ let moveFour = document.getElementById("move3");
 let moveThree = document.getElementById("move4");
 
 
-let spritePreviousEvolutionHtml = document.getElementById("spritePrevious");
 let previousEvolutionSprite;
 
 document.getElementById("run").addEventListener("click", function () {
@@ -53,9 +52,11 @@ document.getElementById("run").addEventListener("click", function () {
 async function getPreviousEvolution(naampokemon, data) {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${naampokemon}`);
     let pokemonEvolutionDataPrevious = await response.json();
-    console.log(pokemonEvolutionDataPrevious);
+    console.log(pokemonEvolutionDataPrevious.sprites);
     console.log(data);
 
+    document.getElementById("spritePrevious") = pokemonEvolutionDataPrevious.sprites.front_shiny;
+    //spritePreviousEvolutionHtml.setAttribute("src", );
     // console.log(pokemonEvolutionDataPrevious);
     // document.getElementById("pokemonNameHTML").innerHTML = pokemonData.species.name;
     // document.getElementById("pokemonIdHTML").innerHTML = pokemonData.id;
