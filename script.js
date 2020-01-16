@@ -60,7 +60,6 @@ async function getPreviousEvolution(namepokemon) {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${namepokemon}`);
     let pokemonEvolutionDataPrevious = await response.json();
     console.log(pokemonEvolutionDataPrevious.sprites);
-
     let pokemonSprite = pokemonEvolutionDataPrevious.sprites.front_shiny;
     spritePreviousHtml.setAttribute("src", pokemonSprite);
 
@@ -76,8 +75,15 @@ async function getEvolutionChain(chainId) {
     let response = await fetch(chainId);
     let pokemonEvolutionChainData = await response.json();
     // console.log(pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0].species.name);
+    let eeveeEvolutions = []
+if (pokemonEvolutionChainData.chain.evolves_to[1] !== null){
+    for (let i = 0; i < pokemonEvolutionChainData.chain.evolves_to.length ; i++) {
+        eeveeEvolutions.push(pokemonEvolutionChainData.chain.evolves_to[i].species.name)
+    }
+    console.log(eeveeEvolutions);
+    await getMultipleEvoluti(eeveeEvolutions);
+}
 
-    console.log(pokemonEvolutionChainData.chain);
     let evolutionOne = pokemonEvolutionChainData.chain.species.name;
     if (pokemonEvolutionChainData.chain.evolves_to[0] == null){
         await getEvolutionChainSprites1(evolutionOne)
@@ -142,5 +148,20 @@ async function getEvolutionChainSprites1(evolutionOne) {
             spriteChainTwo.setAttribute("src", pokemonEvolutionChainSprite2.sprites.front_shiny);
             spriteChainThree.setAttribute("src", pokemonEvolutionChainSprite3.sprites.front_shiny);
 
+
+        }
+
+        async function getMultipleEvoluti(array) {
+          let fetchData = [];
+          let responseArray = [];
+          let spriteArray = [];
+
+
+    for (let i = 0; i < array.length ; i++) {
+          fetchData [i] = await fetch(`https://pokeapi.co/api/v2/pokemon/${array[i]}`);
+            responseArray[i] = await fetchData[i].json();
+            spriteArray.push(responseArray[i].sprites.front_shiny);
+            }
+            console.log(spriteArray);
 
         }
