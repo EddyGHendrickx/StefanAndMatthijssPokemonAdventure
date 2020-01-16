@@ -77,7 +77,7 @@ async function getEvolutionChain(chainId, data) {
     console.log(pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0].species.name);
     let chainToLink = pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0].species.name;
     console.log(data);
-    getEvolutionChainSprites(chainToLink);
+    await getEvolutionChainSprites(chainToLink);
  //   let pokemonSprite = pokemonEvolutionChainData.;
    // spritePreviousHtml.setAttribute("src", pokemonSprite);
 
