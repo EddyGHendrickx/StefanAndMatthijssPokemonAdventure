@@ -55,11 +55,11 @@ async function getEvolution() {
     }
     getEvolutionChain(evolutionData.evolution_chain.url);
 }
-async function getPreviousEvolution(namepokemon, data) {
+async function getPreviousEvolution(namepokemon) {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${namepokemon}`);
     let pokemonEvolutionDataPrevious = await response.json();
     console.log(pokemonEvolutionDataPrevious.sprites);
-    console.log(data);
+
     let pokemonSprite = pokemonEvolutionDataPrevious.sprites.front_shiny;
     spritePreviousHtml.setAttribute("src", pokemonSprite);
 
@@ -71,13 +71,17 @@ async function getPreviousEvolution(namepokemon, data) {
     // document.getElementById("pokemonIdHTML").innerHTML = pokemonData.id;
 }
 
-async function getEvolutionChain(chainId, data) {
+async function getEvolutionChain(chainId) {
     let response = await fetch(chainId);
     let pokemonEvolutionChainData = await response.json();
     console.log(pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0].species.name);
-    let chainToLink = pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0].species.name;
-    console.log(data);
-    getEvolutionChainSprites(chainToLink);
+    console.log(pokemonEvolutionChainData.chain);
+    let evolutionOne = pokemonEvolutionChainData.chain.species.name;
+    let evolutionTwo = pokemonEvolutionChainData.chain.evolves_to[0].species.name;
+    let evolutionThree = pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0].species.name;
+
+    await getEvolutionChainSprites(evolutionOne,evolutionTwo, evolutionThree );
+
  //   let pokemonSprite = pokemonEvolutionChainData.;
    // spritePreviousHtml.setAttribute("src", pokemonSprite);
 
@@ -86,10 +90,18 @@ async function getEvolutionChain(chainId, data) {
 
 }
 
-async function getEvolutionChainSprites(chainName, data) {
-    let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${chainName}`);
-    let pokemonEvolutionChainSprite = await response.json();
-    console.log(pokemonEvolutionChainSprite.sprites.front_shiny);
-    console.log(data);
+async function getEvolutionChainSprites(evolutionOne, evolutionTwo, evolutionThree) {
+    let responseOne = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionOne}`);
+    let responseTwo = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionTwo}`);
+    let responseThree = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionThree}`);
+    let pokemonEvolutionChainSprite1 = await responseOne.json();
+    let pokemonEvolutionChainSprite2 = await responseTwo.json();
+    let pokemonEvolutionChainSprite3 = await responseThree.json();
+
+    console.log(pokemonEvolutionChainSprite1.sprites.front_shiny);
+    console.log(pokemonEvolutionChainSprite2.sprites.front_shiny);
+    console.log(pokemonEvolutionChainSprite3.sprites.front_shiny);
+
+
 }
 
