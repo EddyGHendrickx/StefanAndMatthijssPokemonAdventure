@@ -137,5 +137,3 @@ async function getEvolutionChainSprites1(evolutionOne) {
 
 
         }
-
->>>>>>> 247cd54aa0f138d65db0005d77165be9e0dd447f
