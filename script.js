@@ -51,14 +51,10 @@ async function getEvolution() {
     } else {
         previousNameHtml.innerHTML = "";
         previousIdHtml.innerHTML = "";
-        spritePreviousHtml.setAttribute("src", "just de kloten")
+        spritePreviousHtml.setAttribute("src", "niets")
     }
-
-
+    getEvolutionChain(evolutionData.evolution_chain.url);
 }
-
-
-
 async function getPreviousEvolution(namepokemon, data) {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${namepokemon}`);
     let pokemonEvolutionDataPrevious = await response.json();
@@ -75,6 +71,25 @@ async function getPreviousEvolution(namepokemon, data) {
     // document.getElementById("pokemonIdHTML").innerHTML = pokemonData.id;
 }
 
+async function getEvolutionChain(chainId, data) {
+    let response = await fetch(chainId);
+    let pokemonEvolutionChainData = await response.json();
+    console.log(pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0].species.name);
+    let chainToLink = pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0].species.name;
+    console.log(data);
+    getEvolutionChainSprites(chainToLink);
+ //   let pokemonSprite = pokemonEvolutionChainData.;
+   // spritePreviousHtml.setAttribute("src", pokemonSprite);
 
+    //previousNameHtml.innerHTML = pokemonEvolutionDataPrevious.name;
+    // previousIdHtml.innerHTML = pokemonEvolutionDataPrevious.id;
 
+}
+
+async function getEvolutionChainSprites(chainName, data) {
+    let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${chainName}`);
+    let pokemonEvolutionChainSprite = await response.json();
+    console.log(pokemonEvolutionChainSprite.sprites.front_shiny);
+    console.log(data);
+}
 
