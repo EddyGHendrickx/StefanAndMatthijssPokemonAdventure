@@ -20,7 +20,11 @@ let spritePreviousHtml = document.getElementById("spritePrevious");
 document.getElementById("run").addEventListener("click", function () {
     console.log(nameInput.value);
     getPokemon();
-    getEvolution()
+    getEvolution().catch(function () {
+        spriteChainOne.removeAttribute("src");
+        spriteChainTwo.removeAttribute("src");
+        spriteChainThree.removeAttribute("src");
+    });
 });
 
 async function getPokemon(id) {
@@ -76,7 +80,7 @@ async function getEvolutionChain(chainId) {
     console.log(pokemonEvolutionChainData.chain);
     let evolutionOne = pokemonEvolutionChainData.chain.species.name;
     if (pokemonEvolutionChainData.chain.evolves_to[0] == null){
-        await getEvolutionChainSprites1(evolutionOne);
+        await getEvolutionChainSprites1(evolutionOne)
 
     } else if (pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0] == null){
         let evolutionTwo = pokemonEvolutionChainData.chain.evolves_to[0].species.name;
@@ -100,6 +104,9 @@ async function getEvolutionChainSprites1(evolutionOne) {
     console.log(pokemonEvolutionChainSprite1.sprites.front_shiny);
     spriteChainOne.setAttribute("src", pokemonEvolutionChainSprite1.sprites.front_shiny);
 }
+
+
+
     async function getEvolutionChainSprites2(evolutionOne, evolutionTwo) {
         let responseTwo = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionTwo}`);
         let responseOne = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionOne}`);
