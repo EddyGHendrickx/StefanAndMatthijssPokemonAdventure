@@ -94,6 +94,8 @@ async function getEvolutionChainSprites1(evolutionOne) {
 
     let pokemonEvolutionChainSprite1 = await responseOne.json();
 
+    spriteChainTwo.removeAttribute("src");
+    spriteChainThree.removeAttribute("src");
 
     console.log(pokemonEvolutionChainSprite1.sprites.front_shiny);
     spriteChainOne.setAttribute("src", pokemonEvolutionChainSprite1.sprites.front_shiny);
