@@ -6,6 +6,11 @@ let moveTwo = document.getElementById("move2");
 let moveFour = document.getElementById("move3");
 let moveThree = document.getElementById("move4");
 
+let spriteChainOne = document.getElementById("spriteChain1");
+let spriteChainTwo = document.getElementById("spriteChain2");
+let spriteChainThree = document.getElementById("spriteChain3");
+
+
 let previousNameHtml = document.getElementById("previousNameHTML");
 
 let previousIdHtml = document.getElementById("previousIdHTML");
@@ -44,15 +49,7 @@ async function getPokemon(id) {
 async function getEvolution() {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${nameInput.value}`);
     let evolutionData = await response.json();
-    if (!(evolutionData.evolves_from_species == null)){
-        console.log(evolutionData.evolves_from_species.name);
-        const previousPokemonName = evolutionData.evolves_from_species.name;
-        getPreviousEvolution(previousPokemonName, evolutionData);
-    } else {
-        previousNameHtml.innerHTML = "";
-        previousIdHtml.innerHTML = "";
-        spritePreviousHtml.setAttribute("src", "https://www.publicdomainpictures.net/pictures/30000/t2/plain-white-background.jpg")
-    }
+
     getEvolutionChain(evolutionData.evolution_chain.url);
 }
 async function getPreviousEvolution(namepokemon) {
@@ -79,32 +76,62 @@ async function getEvolutionChain(chainId) {
     console.log(pokemonEvolutionChainData.chain);
     let evolutionOne = pokemonEvolutionChainData.chain.species.name;
     if (pokemonEvolutionChainData.chain.evolves_to[0] == null){
-        await getEvolutionChainSprites(evolutionOne);
+        await getEvolutionChainSprites1(evolutionOne);
 
     } else if (pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0] == null){
         let evolutionTwo = pokemonEvolutionChainData.chain.evolves_to[0].species.name;
-        await getEvolutionChainSprites(evolutionOne, evolutionTwo);
+        await getEvolutionChainSprites2(evolutionOne, evolutionTwo);
     } else {
         let evolutionTwo = pokemonEvolutionChainData.chain.evolves_to[0].species.name;
         let evolutionThree = pokemonEvolutionChainData.chain.evolves_to[0].evolves_to[0].species.name;
-        await getEvolutionChainSprites(evolutionOne, evolutionTwo, evolutionThree)
+        await getEvolutionChainSprites3(evolutionOne, evolutionTwo, evolutionThree)
     }
 
 }
 
-async function getEvolutionChainSprites(evolutionOne, evolutionTwo, evolutionThree) {
-    let responseThree = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionThree}`);
-    let responseTwo = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionTwo}`);
+async function getEvolutionChainSprites1(evolutionOne) {
     let responseOne = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionOne}`);
 
     let pokemonEvolutionChainSprite1 = await responseOne.json();
-    let pokemonEvolutionChainSprite2 = await responseTwo.json();
-    let pokemonEvolutionChainSprite3 = await responseThree.json();
+
 
     console.log(pokemonEvolutionChainSprite1.sprites.front_shiny);
-    console.log(pokemonEvolutionChainSprite2.sprites.front_shiny);
-    console.log(pokemonEvolutionChainSprite3.sprites.front_shiny);
-
-
+    spriteChainOne.setAttribute("src", pokemonEvolutionChainSprite1.sprites.front_shiny);
 }
+    async function getEvolutionChainSprites2(evolutionOne, evolutionTwo) {
+        let responseTwo = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionTwo}`);
+        let responseOne = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionOne}`);
+
+        let pokemonEvolutionChainSprite1 = await responseOne.json();
+        let pokemonEvolutionChainSprite2 = await responseTwo.json();
+
+
+        console.log(pokemonEvolutionChainSprite1.sprites.front_shiny);
+        spriteChainOne.setAttribute("src", pokemonEvolutionChainSprite1.sprites.front_shiny);
+        spriteChainTwo.setAttribute("src", pokemonEvolutionChainSprite2.sprites.front_shiny);
+        spriteChainThree.removeAttribute("src");
+
+        console.log(pokemonEvolutionChainSprite2.sprites.front_shiny);
+
+
+    }
+        async function getEvolutionChainSprites3(evolutionOne, evolutionTwo, evolutionThree) {
+            let responseThree = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionThree}`);
+            let responseTwo = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionTwo}`);
+            let responseOne = await fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionOne}`);
+
+            let pokemonEvolutionChainSprite1 = await responseOne.json();
+            let pokemonEvolutionChainSprite2 = await responseTwo.json();
+            let pokemonEvolutionChainSprite3 = await responseThree.json();
+
+            console.log(pokemonEvolutionChainSprite1.sprites.front_shiny);
+            console.log(pokemonEvolutionChainSprite2.sprites.front_shiny);
+            console.log(pokemonEvolutionChainSprite3.sprites.front_shiny);
+
+            spriteChainOne.setAttribute("src", pokemonEvolutionChainSprite1.sprites.front_shiny);
+            spriteChainTwo.setAttribute("src", pokemonEvolutionChainSprite2.sprites.front_shiny);
+            spriteChainThree.setAttribute("src", pokemonEvolutionChainSprite3.sprites.front_shiny);
+
+
+        }
 
